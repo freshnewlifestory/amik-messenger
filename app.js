@@ -9,7 +9,7 @@ async function register() {
     }
 
     try {
-        const { data, error } = await db
+        const { error } = await db
             .from("users")
             .insert([
                 {
@@ -47,9 +47,15 @@ async function login() {
         }
 
         if (data && data.length > 0) {
-            status.innerText = "✅ Login Success";
+
+            localStorage.setItem("username", username);
+
+            window.location.href = "home.html";
+
         } else {
+
             status.innerText = "❌ Wrong Username or Password";
+
         }
 
     } catch (e) {
