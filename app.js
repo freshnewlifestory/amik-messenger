@@ -9,7 +9,7 @@ async function register() {
     }
 
     try {
-        const { data, error } = await supabase
+        const { data, error } = await db
             .from("users")
             .insert([
                 {
@@ -19,13 +19,13 @@ async function register() {
             ]);
 
         if (error) {
-            status.innerText = "Error: " + error.message;
+            status.innerText = "❌ " + error.message;
         } else {
             status.innerText = "✅ Account Created Successfully";
         }
 
     } catch (e) {
-        status.innerText = "Error: " + e.message;
+        status.innerText = "❌ " + e.message;
     }
 }
 
@@ -35,14 +35,14 @@ async function login() {
     const status = document.getElementById("status");
 
     try {
-        const { data, error } = await supabase
+        const { data, error } = await db
             .from("users")
             .select("*")
             .eq("username", username)
             .eq("password", password);
 
         if (error) {
-            status.innerText = "Error: " + error.message;
+            status.innerText = "❌ " + error.message;
             return;
         }
 
@@ -53,6 +53,6 @@ async function login() {
         }
 
     } catch (e) {
-        status.innerText = "Error: " + e.message;
+        status.innerText = "❌ " + e.message;
     }
 }
